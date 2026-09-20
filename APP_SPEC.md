@@ -1,5 +1,7 @@
 # AutoType for Mac — first release
 
+Released as v0.1.0. The app and DMG are signed, notarized, and available through [GitHub Releases](https://github.com/diegocodehub/autotype/releases/tag/v0.1.0).
+
 ## Scope
 
 A native, single-window Mac app. Paste text into a large plain-text box, optionally expand Options, click Send, and focus the destination during the chosen countdown. No Terminal needed for recipients.

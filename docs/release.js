@@ -1,4 +1,4 @@
-// Keep an honest fallback until a public DMG exists. No tracking or cookies.
+// Refresh release details; the static download link also works without JavaScript.
 fetch("https://api.github.com/repos/diegocodehub/autotype/releases/latest")
   .then((response) => {
     if (!response.ok) throw new Error("No public release yet");
@@ -17,8 +17,8 @@ fetch("https://api.github.com/repos/diegocodehub/autotype/releases/latest")
     button.href = url.href;
     button.textContent = "Download for Mac ↓";
     document.getElementById("release-status").textContent =
-      `${release.tag_name} · Free download`;
+      `${release.tag_name} · Free download · Signed and notarized`;
   })
   .catch(() => {
-    /* The Releases link remains available if the API is unavailable. */
+    /* The static download link remains available if the API is unavailable. */
   });

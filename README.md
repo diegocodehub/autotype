@@ -2,7 +2,9 @@
 
 A small Mac app that sends your text as keyboard events. Paste code or other text into AutoType, click **Send**, then focus the destination during the countdown (3 seconds by default).
 
-**Status:** First app implementation. Local builds are available from source; the public notarized download is still being prepared.
+**[Download AutoType for Mac](https://github.com/diegocodehub/autotype/releases/latest/download/AutoType.dmg)** — Developer ID signed and notarized. Requires macOS 13 or later; supports Apple silicon and Intel.
+
+Open the DMG, drag AutoType to Applications, then grant Accessibility permission when prompted. No Terminal or developer tools needed.
 
 [Project website](https://diegocodehub.github.io/autotype/) · [Releases](https://github.com/diegocodehub/autotype/releases) · [MIT license](LICENSE)
 
