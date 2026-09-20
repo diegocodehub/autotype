@@ -35,6 +35,6 @@ Keep six focused tests for whitespace/indentation, newline normalization, Unicod
 
 Public MIT-licensed GitHub repository at `diegocodehub/autotype`. Free static GitHub Pages site from `docs/`; DMG hosted in Releases. Keep signing material, local settings, test artifacts, and generated builds out of Git.
 
-Use the owner's Developer ID Application certificate, hardened runtime, and Apple's notarization service. Deliver a stapled, validated `AutoType.dmg`. Local ad-hoc builds are labeled for development and are not the public download. See [RELEASING.md](RELEASING.md).
+Use the owner's Developer ID Application certificate, hardened runtime, and Apple's notarization service. Deliver a stapled, validated `AutoType.dmg`. Local builds use a stable development certificate when available and are labeled for development and are not the public download. See [RELEASING.md](RELEASING.md).
 
 First-release completion requires the app, focused checks, and a signed/notarized DMG. Availability of signing credentials may block the final distribution step without blocking local development or publishing source.

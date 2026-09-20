@@ -35,7 +35,9 @@ swift test
 open dist/AutoType.app
 ```
 
-The packaging script builds a universal app for Apple silicon and Intel, creates its icon, and produces `dist/AutoType-local.dmg`. This is an ad-hoc signed development build, **not a notarized public release**. Accessibility permission may need to be granted again after rebuilding a locally signed app.
+The packaging script builds a universal app for Apple silicon and Intel, creates its icon, and produces `dist/AutoType-local.dmg`. This is a local development build, **not a notarized public release**. The script automatically uses an Apple Development certificate when exactly one is available; set `LOCAL_SIGNING_IDENTITY` to select a specific certificate. Reuse that identity across builds so macOS can recognize the app. If no unique development certificate is available, the script falls back to ad-hoc signing and prints a warning.
+
+If Accessibility is enabled but the app reports no access after a rebuild, quit AutoType, remove its old entry with **−** in Accessibility settings, use **+** to add the current `dist/AutoType.app`, enable it, and reopen the app. Switching from ad-hoc signing to a certificate also requires this one-time reauthorization. Merely toggling a stale entry may not repair it.
 
 The six focused tests cover indentation/blank lines, newline handling, Unicode chunking, speed, cancellation, and event failures. They do not send keystrokes to your desktop or claim compatibility with every editor.
 

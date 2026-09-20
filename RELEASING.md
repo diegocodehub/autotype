@@ -24,7 +24,7 @@ NOTARY_PROFILE='AutoType' \
 ./scripts/package.sh --release
 ```
 
-This builds Apple silicon and Intel binaries, signs the app with hardened runtime, notarizes and staples the app, creates a DMG, and signs/notarizes/staples the DMG. Both app and DMG are validated. Without `--release`, the script produces only a local development build.
+This builds Apple silicon and Intel binaries, signs the app with hardened runtime, notarizes and staples the app, creates a DMG, and signs/notarizes/staples the DMG. Both app and DMG are validated. Without `--release`, the script produces only a local development build. It uses the sole available Apple Development identity (or `LOCAL_SIGNING_IDENTITY`), falling back to ad-hoc signing when none is uniquely available. Reuse the same certificate to avoid build-hash-based Accessibility grants. Changing signing identities requires removing and re-adding the app in Accessibility settings.
 
 Keep all `dist/` contents out of Git. The script stops on any signing, notarization, or validation failure. Only publish after its final **Notarized release ready** message.
 
@@ -41,6 +41,6 @@ Create a GitHub Release for the version and attach only:
 - `dist/AutoType.dmg`
 - `dist/SHA256SUMS.txt`
 
-Use the asset name `AutoType.dmg` consistently. The Pages website enables its download button when the latest public release has that asset. Never publish a local ad-hoc build as the notarized download. Updates are manual downloads for this release.
+Use the asset name `AutoType.dmg` consistently. The Pages website enables its download button when the latest public release has that asset. Never publish a local development build as the notarized download. Updates are manual downloads for this release.
 
 Apple references: [Developer ID certificates](https://developer.apple.com/help/account/certificates/create-developer-id-certificates), [notarization](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution), [notarization credentials and workflow](https://developer.apple.com/documentation/security/customizing-the-notarization-workflow).

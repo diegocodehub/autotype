@@ -34,7 +34,7 @@ final class TypingModel: ObservableObject {
         guard !isRunning, !text.isEmpty else { return }
         refreshPermission()
         guard hasPermission else {
-            status = "Enable AutoType in Accessibility, then return here and click Send."
+            status = "Allow AutoType in Accessibility. Already enabled? Quit AutoType, remove its old entry with −, add this copy again with +, then reopen."
             hasError = true
             openPermissionSettings()
             return

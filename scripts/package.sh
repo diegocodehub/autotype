@@ -22,7 +22,11 @@ fi
 # Distinct names for the app and CLI avoid case-insensitive filesystem collisions.
 swift build -c release --product AutoTypeDesktop --arch arm64 --arch x86_64
 bin_dir="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)"
-app="$project_dir/dist/AutoType.app"
+# Assemble separately so rebuilding never overwrites a running executable.
+work_dir="$(mktemp -d "$project_dir/.build/package.XXXXXX")"
+trap 'rm -rf "$work_dir"' EXIT
+app="$work_dir/AutoType.app"
+mkdir -p "$project_dir/dist"
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 cp "$bin_dir/AutoTypeDesktop" "$app/Contents/MacOS/AutoTypeDesktop"
 cp Resources/Info.plist "$app/Contents/Info.plist"
@@ -44,13 +48,26 @@ if "$release"; then
   spctl --assess --type execute --verbose "$app"
   dmg="$project_dir/dist/AutoType.dmg"
 else
-  codesign --force --sign - "$app"
+  local_identity="${LOCAL_SIGNING_IDENTITY:-}"
+  if [[ -z "$local_identity" ]]; then
+    development_identities=()
+    while IFS= read -r identity; do
+      development_identities+=("$identity")
+    done < <(security find-identity -v -p codesigning | awk '/"Apple Development:/ {print $2}')
+    if [[ ${#development_identities[@]} -eq 1 ]]; then
+      local_identity="${development_identities[0]}"
+    else
+      local_identity="-"
+      echo 'No unique Apple Development identity found. Set LOCAL_SIGNING_IDENTITY for stable permissions.'
+    fi
+  fi
+  codesign --force --sign "$local_identity" "$app"
   dmg="$project_dir/dist/AutoType-local.dmg"
 fi
 codesign --verify --strict --verbose=2 "$app"
 
-stage="$(mktemp -d "$project_dir/.build/dmg-stage.XXXXXX")"
-trap 'rm -rf "$stage"' EXIT
+stage="$work_dir/dmg-stage"
+mkdir -p "$stage"
 ditto "$app" "$stage/AutoType.app"
 ln -s /Applications "$stage/Applications"
 hdiutil create -volname AutoType -srcfolder "$stage" -format UDZO -ov "$dmg"
@@ -65,5 +82,16 @@ if "$release"; then
   echo "Notarized release ready: $dmg"
 else
   echo "Local development build ready: $dmg"
-  echo 'This build is ad-hoc signed, not notarized. Do not publish it as the public download.'
+  if [[ "$local_identity" == "-" ]]; then
+    echo 'Ad-hoc signing: Accessibility permission may need removal and re-adding after each rebuild.'
+  else
+    echo 'Development certificate signing: using a stable identity for local Accessibility permissions.'
+  fi
+  echo 'This local build is not notarized. Do not publish it as the public download.'
 fi
+
+# Swap the completed bundle without changing the old process's executable bytes.
+if [[ -e "$project_dir/dist/AutoType.app" ]]; then
+  mv "$project_dir/dist/AutoType.app" "$work_dir/previous.app"
+fi
+mv "$app" "$project_dir/dist/AutoType.app"
