@@ -1,0 +1,29 @@
+# Generated output and local editor state
+.build/
+.swiftpm/
+dist/
+.DS_Store
+.vscode/
+*.xcuserstate
+xcuserdata/
+
+# Signing material and local credentials never belong in source control
+.env
+.env.*
+*.p12
+*.pfx
+*.pem
+*.key
+*.p8
+*.cer
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile
+*.keychain*
+secrets/
+
+# Packaged builds belong in Releases, not Git history
+*.app/
+*.dmg
+*.zip
+*.dSYM/

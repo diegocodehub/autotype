@@ -1,0 +1,73 @@
+# AutoType
+
+A small Mac app that sends your text as keyboard events. Paste code or other text into AutoType, click **Send text**, then focus the destination during the three-second countdown.
+
+**Status:** First app implementation. Local builds are available from source; the public notarized download is still being prepared.
+
+[Project website](https://diegocodehub.github.io/autotype/) · [Releases](https://github.com/diegocodehub/autotype/releases) · [MIT license](LICENSE)
+
+## Using the app
+
+1. Open AutoType and enable it in **System Settings → Privacy & Security → Accessibility** when prompted.
+2. Enter your text. Choose a typing speed from 10 to 40 characters per second.
+3. Optionally enable **Fix automatic indentation** or **Instant mode**.
+4. Click **Send text**, then click the destination within three seconds.
+5. Press **Escape** to stop. Switching to a different app during sending also stops the run.
+
+**Fix automatic indentation** removes indentation added by the receiving editor after Return, then types your original whitespace. Start at the beginning of an empty line. This mode requires the destination's macOS Command-Shift-Left shortcut. Quote/bracket completion and formatting in the destination may also change text.
+
+**Instant mode** is experimental. It sends small Unicode text chunks through keyboard events instead of delaying between individual characters. It never invokes clipboard paste. Receiving apps may process chunks differently; it is not a guarantee of instant insertion or compatibility. Indentation correction still takes a short pause at every newline.
+
+Stop cancels the remaining work, not text or events already delivered. The Escape shortcut also reaches the destination application. “Finished sending” means events were sent, not that the destination was inspected.
+
+## Privacy
+
+Text stays in memory and is discarded when the app quits. AutoType has no accounts, analytics, cloud service, or text history. Sending does not read or modify the clipboard. The app observes Escape while a run is active so you can stop without switching back; it does not record your typing. Signing credentials belong in the macOS Keychain and are never part of this repository.
+
+## Build locally
+
+Requires macOS 13 or later and Xcode with Swift 6 or newer. No third-party dependencies.
+
+```bash
+swift build
+swift test
+./scripts/package.sh
+open dist/AutoType.app
+```
+
+The packaging script builds a universal app for Apple silicon and Intel, creates its icon, and produces `dist/AutoType-local.dmg`. This is an ad-hoc signed development build, **not a notarized public release**. Accessibility permission may need to be granted again after rebuilding a locally signed app.
+
+The six focused tests cover indentation/blank lines, newline handling, Unicode chunking, speed, cancellation, and event failures. They do not send keystrokes to your desktop or claim compatibility with every editor.
+
+## Command line
+
+The original CLI shares the app's typing engine:
+
+```bash
+swift run autotype 'Hello from AutoType!'
+swift run autotype --code 'if s == "end":
+    print("stop")
+else:
+    print("go")'
+swift run autotype --speed 20 'Slower typing'
+swift run autotype --instant 'Fast text delivery'
+swift run autotype --help
+```
+
+Combine `--code` and `--instant` if needed. The CLI needs Accessibility permission for your terminal; Control-C stops it. Use `--` before text beginning with `--`. Shell quotes are shell syntax, so code containing a single quote needs appropriate shell quoting; the app's text box avoids this issue.
+
+## Public release
+
+See [RELEASING.md](RELEASING.md) for Developer ID signing, notarization, and publication. The DMG belongs in GitHub Releases, not Git history. The website is served from `docs/` using GitHub Pages.
+
+## Project structure
+
+- `Sources/AutoTypeCore/` — shared keyboard-event engine.
+- `Sources/AutoTypeApp/` — native SwiftUI app and plain-text editor.
+- `Sources/autotype/` — CLI entry point.
+- `Tests/AutoTypeCoreTests/` — focused regression tests.
+- `Resources/` and `scripts/` — app metadata, icon drawing, and packaging.
+- `docs/` — static download website; no build tooling required.
+- [APP_SPEC.md](APP_SPEC.md) — first-release scope.
+
+Bug reports and small, focused contributions are welcome. Include your macOS version, the receiving app, the selected modes, and a non-sensitive example when reporting delivery issues.

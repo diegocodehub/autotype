@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="AutoType is a free, open-source Mac app that sends your text as keystrokes. Adjustable speed, optional indentation correction, and experimental instant mode."
+    />
+    <meta name="theme-color" content="#f7f7fb" />
+    <title>AutoType — your text, sent as keystrokes</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="wrap">
+      <a class="brand" href="./"
+        ><img src="icon.svg" alt="" width="36" height="36" />AutoType</a
+      ><a class="source-link" href="https://github.com/diegocodehub/autotype"
+        >View on GitHub <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main class="wrap">
+      <section class="hero">
+        <p class="eyebrow">A SMALL UTILITY FOR YOUR MAC</p>
+        <h1>Your text.<br />Sent as keystrokes.</h1>
+        <p class="intro">
+          Drop in a snippet, choose a speed, and let AutoType enter it for you.
+          A simple native Mac app with nothing to sign up for.
+        </p>
+        <div class="actions">
+          <a
+            id="download"
+            class="button"
+            href="https://github.com/diegocodehub/autotype/releases"
+            >Check release availability <span aria-hidden="true">↗</span></a
+          ><a class="secondary" href="https://github.com/diegocodehub/autotype"
+            >Explore the source</a
+          >
+        </div>
+        <p id="release-status" class="fine" aria-live="polite">
+          First notarized download in preparation. Source available now.
+        </p>
+        <p class="compatibility">
+          macOS 13+ <span>·</span> Apple silicon &amp; Intel <span>·</span> Free
+          &amp; open source
+        </p>
+      </section>
+      <section class="preview" aria-label="AutoType interface illustration">
+        <div class="window-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span
+          ><span>AutoType</span><span class="spacer"></span>
+        </div>
+        <div class="window-body">
+          <div class="app-heading">
+            <img src="icon.svg" width="46" height="46" alt="" />
+            <div>
+              <strong>AutoType</strong>
+              <p>Your text. Sent as keystrokes.</p>
+            </div>
+          </div>
+          <div class="editor-label">TEXT TO SEND</div>
+          <pre><code><span class="pink">if</span> s == <span class="green">"end"</span>:
+    print(<span class="green">"stop"</span>)
+<span class="pink">else</span>:
+    print(<span class="green">"go"</span>)</code></pre>
+          <div class="settings">
+            <div>
+              <span class="check" aria-hidden="true">✓</span
+              ><span>Fix automatic indentation</span>
+            </div>
+            <div>
+              <span class="unchecked" aria-hidden="true"></span
+              ><span>Instant mode</span><small>EXPERIMENTAL</small>
+            </div>
+            <div class="speed">
+              <span>Typing speed</span><span class="track"><i></i></span
+              ><span>40 chars/s</span>
+            </div>
+          </div>
+          <div class="window-footer">
+            <span
+              >3 seconds to switch apps.<br /><small
+                >Press Esc to stop.</small
+              ></span
+            ><span class="mock-button">Send text ↗</span>
+          </div>
+        </div>
+      </section>
+      <section class="features" aria-label="Features">
+        <article>
+          <span class="number">01</span>
+          <h2>Set your pace.</h2>
+          <p>
+            Choose 10–40 characters per second, or try experimental instant mode
+            to send text in quick bursts.
+          </p>
+        </article>
+        <article>
+          <span class="number">02</span>
+          <h2>Keep your spacing.</h2>
+          <p>
+            Optional indentation correction clears spaces your editor adds after
+            Enter, then enters your original whitespace.
+          </p>
+        </article>
+        <article>
+          <span class="number">03</span>
+          <h2>Stay in control.</h2>
+          <p>
+            A countdown gives you time to switch apps. Press Escape to stop.
+            Your text stays on your Mac.
+          </p>
+        </article>
+      </section>
+      <section class="setup">
+        <div>
+          <p class="eyebrow">WHEN THE DOWNLOAD IS READY</p>
+          <h2>Drag. Open. Allow.</h2>
+        </div>
+        <ol>
+          <li>Open the DMG and drag AutoType to Applications.</li>
+          <li>
+            Allow AutoType in System Settings → Privacy &amp; Security →
+            Accessibility.
+          </li>
+          <li>Enter your text, click Send text, and focus your destination.</li>
+        </ol>
+      </section>
+      <aside>
+        <strong>A note on compatibility.</strong> AutoType sends keyboard
+        events; it does not invoke clipboard paste. Instant mode is
+        experimental, and receiving apps may change or reject input. Indentation
+        correction requires the macOS Command-Shift-Left shortcut. Start on an
+        empty line when using it.
+      </aside>
+    </main>
+    <footer class="wrap">
+      <span>AutoType <span class="muted">· Made for macOS</span></span
+      ><a href="https://github.com/diegocodehub/autotype/blob/main/LICENSE"
+        >MIT license</a
+      ><a href="https://github.com/diegocodehub/autotype/issues"
+        >Report an issue</a
+      >
+    </footer>
+    <script src="release.js"></script>
+  </body>
+</html>
