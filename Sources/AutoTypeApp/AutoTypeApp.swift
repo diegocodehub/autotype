@@ -9,7 +9,7 @@ struct AutoTypeApp: App {
         Window("AutoType", id: "main") {
             ContentView()
         }
-        .defaultSize(width: 760, height: 800)
+        .defaultSize(width: 600, height: 560)
         .windowResizability(.contentMinSize)
         .commands {
             CommandGroup(replacing: .newItem) {}

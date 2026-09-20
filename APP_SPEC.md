@@ -2,15 +2,18 @@
 
 ## Scope
 
-A native, single-window Mac app. Paste text into a large plain-text box, choose options, click Send text, and focus the destination during a three-second countdown. No Terminal needed for recipients.
+A native, single-window Mac app. Paste text into a large plain-text box, optionally expand Options, click Send, and focus the destination during the chosen countdown. No Terminal needed for recipients.
 
 ## Controls
 
-- Plain-text input with whitespace preserved and automatic text substitutions disabled.
+- Large plain-text input with whitespace preserved and automatic text substitutions disabled.
+- Full-width **Send** button directly below the input; no decorative heading, icon, subtitle, or character counter.
+- **Options** disclosure collapsed by default, containing the delay, speed, and mode controls.
+- **Start delay**, 1–60 seconds; default 3. Snapshot the chosen delay when sending starts.
 - **Fix automatic indentation**, off by default: existing `--code` behavior.
 - **Speed** slider, 10–40 characters per second; default 40. The current CLI speed is the baseline, not a universal compatibility guarantee.
 - **Instant mode**, off by default and labeled experimental: bounded Unicode chunks sent through keyboard events. The speed slider is disabled in this mode. No paste commands or clipboard delivery.
-- **Send text**, visible countdown, and **Stop**. Escape stops while another app is focused.
+- **Send**, visible countdown while running, and **Stop**. Escape stops while another app is focused.
 
 ## Behavior
 
@@ -20,7 +23,7 @@ Indentation correction remains optional in both modes. It clears editor-generate
 
 One run at a time. Snapshot input and options before countdown. Never type into AutoType itself. Stop if the user switches to another app during sending. Cancellation cannot retract events already delivered. Do not automatically retry or fall back to paste.
 
-Text stays in memory. No accounts, analytics, history, cloud sync, settings window, or automatic updater. Explain Accessibility permission on first use and provide an Open Settings button.
+Text stays in memory. No accounts, analytics, history, cloud sync, settings window, or automatic updater. If Send is clicked without Accessibility permission, open the settings and show a short explanation. Also provide a settings button inside Options while permission is missing.
 
 ## Implementation and checks
 

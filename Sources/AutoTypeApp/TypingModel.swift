@@ -9,9 +9,10 @@ final class TypingModel: ObservableObject {
     @Published var fixIndentation = false
     @Published var instant = false
     @Published var speed = 40.0
+    @Published var startDelay = 3
     @Published private(set) var isRunning = false
     @Published private(set) var hasPermission = AXIsProcessTrusted()
-    @Published private(set) var status = "Ready when you are."
+    @Published private(set) var status = ""
     @Published private(set) var hasError = false
 
     private var task: Task<Void, Never>?
@@ -33,11 +34,13 @@ final class TypingModel: ObservableObject {
         guard !isRunning, !text.isEmpty else { return }
         refreshPermission()
         guard hasPermission else {
-            status = "Allow Accessibility access to start sending."
+            status = "Enable AutoType in Accessibility, then return here and click Send."
             hasError = true
+            openPermissionSettings()
             return
         }
         let input = text
+        let delay = startDelay
         let options = TypingOptions(fixIndentation: fixIndentation, instant: instant, charactersPerSecond: speed)
         hasError = false
         isRunning = true
@@ -49,7 +52,7 @@ final class TypingModel: ObservableObject {
         task = Task { [weak self] in
             guard let self else { return }
             do {
-                for seconds in (1...3).reversed() {
+                for seconds in (1...delay).reversed() {
                     status = "Starting in \(seconds)… Click your destination. Esc to stop."
                     try await Task.sleep(for: .seconds(1))
                 }

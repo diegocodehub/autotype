@@ -1,6 +1,6 @@
 # AutoType
 
-A small Mac app that sends your text as keyboard events. Paste code or other text into AutoType, click **Send text**, then focus the destination during the three-second countdown.
+A small Mac app that sends your text as keyboard events. Paste code or other text into AutoType, click **Send**, then focus the destination during the countdown (3 seconds by default).
 
 **Status:** First app implementation. Local builds are available from source; the public notarized download is still being prepared.
 
@@ -8,10 +8,10 @@ A small Mac app that sends your text as keyboard events. Paste code or other tex
 
 ## Using the app
 
-1. Open AutoType and enable it in **System Settings → Privacy & Security → Accessibility** when prompted.
-2. Enter your text. Choose a typing speed from 10 to 40 characters per second.
-3. Optionally enable **Fix automatic indentation** or **Instant mode**.
-4. Click **Send text**, then click the destination within three seconds.
+1. Open AutoType and enable it in **System Settings → Privacy & Security → Accessibility** when prompted. If permission is missing, clicking Send opens the permission settings.
+2. Enter your text. The window shows a large text field and a full-width **Send** button.
+3. Expand **Options** if needed: set the start delay (1–60 seconds, default 3), typing speed (10–40 characters per second), **Fix automatic indentation**, or **Instant mode**. Options are collapsed when the app opens.
+4. Click **Send**, then click the destination before your chosen countdown ends.
 5. Press **Escape** to stop. Switching to a different app during sending also stops the run.
 
 **Fix automatic indentation** removes indentation added by the receiving editor after Return, then types your original whitespace. Start at the beginning of an empty line. This mode requires the destination's macOS Command-Shift-Left shortcut. Quote/bracket completion and formatting in the destination may also change text.

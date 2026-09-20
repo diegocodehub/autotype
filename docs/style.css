@@ -164,26 +164,6 @@ p {
 .window-body {
   padding: 24px;
 }
-.app-heading {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 24px;
-}
-.app-heading strong {
-  font-size: 22px;
-  letter-spacing: -0.6px;
-}
-.app-heading p {
-  font-size: 12px;
-  color: var(--muted);
-}
-.editor-label {
-  font-size: 9px;
-  letter-spacing: 1.4px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
 pre {
   font:
     14px/1.9 ui-monospace,
@@ -204,87 +184,18 @@ pre {
 .green {
   color: #347753;
 }
-.settings {
-  font-size: 12px;
-  padding: 16px;
-  border-radius: 9px;
-  background: #f0f0f6;
-}
-.settings > div {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-.settings > div + div {
-  margin-top: 12px;
-}
-.check,
-.unchecked {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 13px;
-  height: 13px;
-  border-radius: 3px;
-  font-size: 10px;
-  flex-shrink: 0;
-}
-.check {
-  color: white;
-  background: var(--accent);
-}
-.unchecked {
-  background: white;
-  border: 1px solid #babacc;
-}
-.settings small {
-  font-size: 7px;
-  font-weight: 650;
-  letter-spacing: 0.6px;
-  color: var(--accent);
-  background: #e4e4fc;
-  padding: 2px 5px;
-  border-radius: 8px;
-}
-.speed {
-  border-top: 1px solid #dddde9;
-  padding-top: 12px;
-  justify-content: space-between;
-}
-.track {
-  height: 4px;
-  flex: 1;
-  background: var(--accent);
-  border-radius: 4px;
-  margin: 0 15px;
-  position: relative;
-}
-.track i {
-  position: absolute;
-  right: 0;
-  top: -5px;
-  width: 14px;
-  height: 14px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 1px 4px #0003;
-}
-.window-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 22px;
-  font-size: 12px;
-}
-.window-footer small {
-  color: var(--muted);
-  font-size: 11px;
-}
 .mock-button {
   background: var(--accent);
   border-radius: 7px;
-  padding: 8px 17px;
+  padding: 10px 17px;
   color: white;
+  text-align: center;
+  font-size: 14px;
+}
+.mock-options {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
 }
 .features {
   display: grid;
@@ -405,14 +316,5 @@ footer > span {
   }
   .muted {
     display: none;
-  }
-  .settings small {
-    font-size: 6px;
-  }
-  .speed {
-    font-size: 10px;
-  }
-  .track {
-    margin: 0 8px;
   }
 }
